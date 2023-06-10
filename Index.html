@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loyalty Program</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .button-row button {
+      margin: 5px;
+    }
+
+    .section {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 style="text-align: center;">Janko Bacani</h2>
+    <h3 style="text-align: center;">Poeni:</h3>
+    <h4 id="funds" style="text-align: center;">0 Poena</h4>
+
+    <!-- Dodaj poene -->
+    <div class="section">
+      <h2>Dodaj poene</h2>
+      <div class="button-row">
+        <button type="button" onclick="addFunds(5)">5 Poena</button>
+        <button type="button" onclick="addFunds(10)">10 Poena</button>
+      </div>
+      <div class="button-row">
+        <button type="button" onclick="addFunds(15)">15 Poena</button>
+        <button type="button" onclick="addFunds(20)">20 Poena</button>
+      </div>
+    </div>
+
+    <!-- Potroši poene -->
+    <div class="section">
+      <h2>Potroši poene</h2>
+      <div class="button-row">
+        <button type="button" onclick="spendFunds(30)">Izlazenje napolje</button>
+        <button type="button" onclick="spendFunds(35)">Izlazenje na ulicu</button>
+        <button type="button" onclick="spendFunds(20)">Igranje i ljuljanje</button>
+      </div>
+      <div class="button-row">
+        <button type="button" onclick="spendFunds(25)">Sladoled</button>
+        <button type="button" onclick="spendFunds(15)">Multimedia</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // Function to update the user details from local storage
+    function updateUserDetails() {
+      var name = 'Janko Bacani';
+      var funds = localStorage.getItem('funds');
+      if (!funds) {
+        funds = 0;
+        saveUserDetails(funds);
+      }
+      document.getElementById('funds').innerText = funds + ' Poena';
+    }
+
+    // Function to save the user details to local storage
+    function saveUserDetails(funds) {
+      localStorage.setItem('funds', funds);
+    }
+
+    // Function to add funds and update the stored funds
+    function addFunds(points) {
+      var funds = parseFloat(document.getElementById('funds').innerText);
+      var newFunds = funds + points;
+
+      // Update the stored funds
+      saveUserDetails(newFunds);
+
+      // Update the displayed funds
+      document.getElementById('funds').innerText = newFunds + ' Poena';
+    }
+
+    // Function to spend funds and update the stored funds
